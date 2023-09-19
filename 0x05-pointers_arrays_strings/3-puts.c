@@ -1,15 +1,16 @@
 #include "main.h"
 /**
- * _strlen - Entry point
- * description: the description
- * @s : char param
- * Return: Always 0 (Succes)
+ * _puts - Entry point
+ * @str: char param
+ * Return: void
  */
-int _strlen(char *s)
+void _puts(char *str)
 {
-	int vari;
+	int i;
 
-	for (vari = 0; *s != '\0'; s++)
-		vari++;
-	return (vari);
-}
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		putchar(str[i]);
+	}
+	putchar('\n');
+}}
