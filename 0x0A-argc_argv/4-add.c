@@ -1,60 +1,77 @@
-#include <stdio.h>
+#include <ctype.h>
 #include "main.h"
-
 /**
- * _atoi - converts a string to an integer
- * @s: string to be converted
- *
- * Return: the int converted from the string
+ * is_positive_number - Entry point
+ * @str: pointer
+ * Return: 0 Always
  */
-int _atoi(char *s)
+int is_positive_number(char *str)
 {
-	int i, d, n, len, f, digit;
+	int i;
+	int num;
 
-	i = 0;
-	d = 0;
-	n = 0;
-	len = 0;
-	f = 0;
-	digit = 0;
-
-	while (s[len] != '\0')
-		len++;
-
-	while (i < len && f == 0)
+	for (i = 0; str[i] != '\0'; i++)
 	{
-		if (s[i] == '-')
-			++d;
-
-		if (s[i] >= '0' && s[i] <= '9')
+		if (!isdigit(str[i]))
 		{
-			digit = s[i] - '0';
-			if (d % 2)
-				digit = -digit;
-			n = n * 10 + digit;
-			f = 1;
-			if (s[i + 1] < '0' || s[i + 1] > '9')
-				break;
-			f = 0;
+			return (0);
 		}
-		i++;
+	}
+	num = atoi(str);
+
+	return (num > 0);
+}
+/**
+ * add_positive_numbers - Entry point
+ * @argc: index of list argv
+ * @argv: list of strings
+ * Return: Always 0
+ */
+int add_positive_numbers(int argc, char *argv[])
+{
+	int total = 0;
+	int error_flag = 0;
+	int i;
+	int num;
+
+	for (i = 1; i < argc; i++)
+	{
+		if (!is_positive_number(argv[i]))
+		{
+			printf("Error\n");
+			error_flag = 1;
+			break;
+		}
+		num = atoi(argv[i]);
+
+		total += num;
 	}
 
-	if (f == 0)
+	if (error_flag)
+	{
+		return (1);
+	}
+	else
+	{
+		printf("%d\n", total);
 		return (0);
-
-	return (n);
+	}
 }
-
 /**
- * main - adds two positive number
- * @argc: number of arguments
- * @argv: array of arguents
- *
- * Return: 0 (Success), or 1 (Success)
+ * main - Entry point
+ * @argc: index of list argv
+ * @argv: list of strings
+ * Return: Always 0
  */
 int main(int argc, char *argv[])
 {
-	int sum, num, i, j, k;
-
-
+	if (argc > 1)
+	{
+		return (add_positive_numbers(argc, argv));
+	}
+	else
+	{
+		printf("0\n");
+		return (0);
+	}
+}
