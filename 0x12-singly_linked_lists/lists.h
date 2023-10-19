@@ -22,7 +22,7 @@ typedef struct list_s
 /* Function to print all elements of a list_t list */
 size_t print_list(const list_t *h);
 size_t list_len(const list_t *h);
-
+list_t *add_node(list_t **head, const char *str);
 /* Additional function prototypes for your project can be added here */
 
 #endif /* LISTS_H */
