@@ -2,39 +2,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * free_listint_safe - frees a linked list
+ * @h: pointer to the first node in the linked list
+ *
+ * Return: number of elements in the freed list
+ */
 size_t free_listint_safe(listint_t **h)
 {
-    listint_t *current, *next;
-    size_t size = 0;
-    int loop_detected = 0;
+    size_t count = 0;
+    listint_t *temp, *current = *h;
 
-    current = *h;
-
-    while (current != NULL)
+    while (current)
     {
-        size++;
-
-        next = current->next; /* Store the next node before freeing current */
-
-        /* Detect a loop using pointer comparison */
-        if (current >= next)
+        if (*h - current > 0) /* Compare the pointers */
         {
-            printf("[%p] %d\n", (void *)current, current->n);
+            temp = current->next; /* Store the next node */
             free(current);
-            loop_detected = 1;
+            current = temp;
+            count++;
+        }
+        else
+        {
+            free(current);
+            current = NULL;
+            count++;
             break;
         }
-
-        printf("[%p] %d\n", (void *)current, current->n);
-        free(current);
-        current = next;
     }
 
     *h = NULL;
 
-    if (loop_detected) {
-        return size;
-    } else {
-        return 0; /* No loop detected, return 0 */
-    }
+    return count;
 }
+
