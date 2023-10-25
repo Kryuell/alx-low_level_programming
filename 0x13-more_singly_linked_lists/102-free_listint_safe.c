@@ -1,7 +1,6 @@
 #include "lists.h"
 #include <stdio.h>
 #include <stdlib.h>
-
 /**
  * free_listint_safe - frees a linked list
  * @h: pointer to the first node in the linked list
@@ -11,21 +10,26 @@
 size_t free_listint_safe(listint_t **h)
 {
 	size_t count = 0;
-	listint_t *temp, *current = *h;
+	int diff;
+	listint_t *temp;
 
-	while (current)
+	if (h == NULL || *h == NULL)
+	return (0);
+
+	while (*h)
 	{
-	if (*h - current > 0) /* Compare the pointers */
+	diff = *h - (*h)->next;  /* Compare the pointers */
+	if (diff > 0)
 	{
-	temp = current->next; /* Store the next node */
-	free(current);
-	current = temp;
+		temp = (*h)->next;
+			free(*h);
+			*h = temp;
 	count++;
 	}
 	else
 	{
-	free(current);
-	current = NULL;
+	free(*h);
+	*h = NULL;
 	count++;
 	break;
 	}
@@ -35,4 +39,3 @@ size_t free_listint_safe(listint_t **h)
 
 	return (count);
 }
-
