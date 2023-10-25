@@ -10,29 +10,29 @@
  */
 size_t free_listint_safe(listint_t **h)
 {
-    size_t count = 0;
-    listint_t *temp, *current = *h;
+	size_t count = 0;
+	listint_t *temp, *current = *h;
 
-    while (current)
-    {
-        if (*h - current > 0) /* Compare the pointers */
-        {
-            temp = current->next; /* Store the next node */
-            free(current);
-            current = temp;
-            count++;
-        }
-        else
-        {
-            free(current);
-            current = NULL;
-            count++;
-            break;
-        }
-    }
+	while (current)
+	{
+	if (*h - current > 0) /* Compare the pointers */
+	{
+	temp = current->next; /* Store the next node */
+	free(current);
+	current = temp;
+	count++;
+	}
+	else
+	{
+	free(current);
+	current = NULL;
+	count++;
+	break;
+	}
+	}
 
-    *h = NULL;
+	*h = NULL;
 
-    return count;
+	return (count);
 }
 
