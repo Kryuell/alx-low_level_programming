@@ -17,13 +17,12 @@ void print_type(unsigned int e_type, unsigned char *e_ident);
 void print_entry(unsigned long int e_entry, unsigned char *e_ident);
 void close_elf(int elf);
 
- /*
+/**
  * check_elf - Checks if a file is an ELF file.
  * @e_ident: A pointer to an array containing the ELF magic numbers.
  *
  * Description: If the file is not an ELF file - exit code 98.
  */
-
 void check_elf(unsigned char *e_ident)
 {
 	int index;
@@ -227,12 +226,11 @@ void print_type(unsigned int e_type, unsigned char *e_ident)
 	}
 }
 
- /*
+/**
  * print_entry - Prints the entry point of an ELF header.
  * @e_entry: The address of the ELF entry point.
  * @e_ident: A pointer to an array containing the ELF class.
  */
-
 void print_entry(unsigned long int e_entry, unsigned char *e_ident)
 {
 	printf("  Entry point address:               ");
@@ -267,7 +265,6 @@ void close_elf(int elf)
 		exit(98);
 	}
 }
-
 /**
  * main - Displays the information contained in the
  *        ELF header at the start of an ELF file.
@@ -279,7 +276,6 @@ void close_elf(int elf)
  * Description: If the file is not an ELF File or
  *              the function fails - exit code 98.
  */
-
 int main(int __attribute__((__unused__)) argc, char *argv[])
 {
 	Elf64_Ehdr *header;
@@ -309,7 +305,6 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 		argv[1]);
 	exit(98);
 	}
-
 	check_elf(header->e_ident);
 	printf("ELF Header:\n");
 	print_magic(header->e_ident);
@@ -320,7 +315,6 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 	print_abi(header->e_ident);
 	print_type(header->e_type, header->e_ident);
 	print_entry(header->e_entry, header->e_ident);
-
 	free(header);
 	close_elf(o);
 	return (0);
