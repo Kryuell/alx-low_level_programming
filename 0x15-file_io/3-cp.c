@@ -3,6 +3,8 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+#define BUFFER_SIZE 1024
+
 /**
  * main - Copy the contents of one file to another
  * @ac: The number of arguments
@@ -13,7 +15,7 @@
 int main(int ac, char **av)
 {
 	int f, t, n;
-	char b[1024];
+	char buffer[BUFFER_SIZE];
 
 	if (ac != 3)
 	{
@@ -32,9 +34,9 @@ int main(int ac, char **av)
 		dprintf(2, "Error: Can't write to %s\n", av[2]);
 		exit(99);
 	}
-	while ((n = read(f, b, 1024)) > 0)
+	while ((n = read(f, buffer, BUFFER_SIZE)) > 0)
 	{
-		if (write(t, b, n) != n)
+		if (write(t, buffer, n) != n)
 		{
 			dprintf(2, "Error: Can't write to %s\n", av[2]);
 			exit(99);
@@ -52,3 +54,4 @@ int main(int ac, char **av)
 	}
 	return (0);
 }
+
