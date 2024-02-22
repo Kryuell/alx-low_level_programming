@@ -5,6 +5,7 @@ The island is represented as a grid of integers where 0 represents water
 and 1 represents land. The grid cells are connected horizontally/vertically.
 """
 
+
 def island_perimeter(grid):
     """
     Returns the perimeter of the island described in grid.
