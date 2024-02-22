@@ -1,25 +1,29 @@
-CC = gcc
-SRC = school.c main.c
-OBJ = $(SRC:%.c=%.o)
-NAME = school
-RM = rm -f
-CFLAGS = -Wall -Werror -Wextra -pedantic
-.PHONY: all clean oclean fclean re
+CC := gcc
+NAME := school
+SRC := main.c school.c
+OBJ := $(SRC:.c=.o)
+CFLAGS := -Wall -Werror -Wextra -pedantic
+
+.PHONY: all clean fclean oclean re
 
 all: $(NAME)
 
-$(NAME): m.h $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+$(NAME): $(SRC)
+	$(CC) $(CFLAGS) -o $(NAME) $(SRC)
 
 clean:
-	$(RM) *~ $(NAME)
+	@find . -type f \( -name '*~' -o -name '#*#' \) -exec rm -f {} +
+	rm -f $(NAME)
 
 oclean:
-	$(RM) $(OBJ)
+	rm -f $(OBJ)
 
 fclean: clean oclean
 
 re: fclean all
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+main.o: main.c
+
+school.o: school.c
+
+%.o: m.h
