@@ -1,14 +1,12 @@
-#include "search_algos.h"
-#include <stdio.h>
+#include <stdio.h> /* Include the standard I/O header */
 
 /**
-* interpolation_search - Searches for a value using the Interpolation search
-* @array: A pointer to the first element of the array to search in
-* @size: The number of elements in the array
-* @value: The value to search for
-*
-* Return: The first index where value is located, or -1 on failure
-*/
+ * interpolation_search - a Function that ...
+ * @array: Description of array.
+ * @size: Description of size.
+ * @value: Description of value.
+ * Return: Description of the return value.
+ */
 int interpolation_search(int *array, size_t size, int value)
 {
 	size_t low = 0;
@@ -29,8 +27,7 @@ int interpolation_search(int *array, size_t size, int value)
 		}
 
 		/* Calculate the probe position */
-		pos = low + (((double)(high - low) /
-			(array[high] - array[low])) * (value - array[low]));
+		pos = low + (((double)(high - low) / (array[high] - array[low])) * (value - array[low]));
 
 		/* Check if the position is within the array bounds */
 		if (pos >= size)
@@ -42,13 +39,14 @@ int interpolation_search(int *array, size_t size, int value)
 		printf("Value checked array[%lu] = [%d]\n", pos, array[pos]);
 
 		if (array[pos] == value)
-			return ((int)pos); /* Value found */
+			return (int)pos; /* Value found */
 
 		if (array[pos] < value)
-			low = pos + 1; /* Value is in upper part of the range */
+			low = pos + 1; /* Value is in the upper part of the range */
 		else
-			high = pos - 1; /* Value is in lower part of the range */
+			high = pos - 1; /* Value is in the lower part of the range */
 	}
 
 	return (-1); /* Value not found */
 }
+
